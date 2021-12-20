@@ -12,7 +12,13 @@ namespace ServiceReservasi
     public interface IService1
     {
         [OperationContract]
-        string Pemesanan(string IDPemesanan, string NamaCustomer, string NoTelpon, int JumlahPemesanan, string IDLokasi);
+        string GetData(int value);
+
+        [OperationContract]
+        CompositeType GetDataUsingDataContract(CompositeType composite);
+
+        [OperationContract]
+        string pemesanan(string IDPemesanan, string NamaCustomer, string NoTelpon, int JumlahPemesanan, string IDLokasi);
         [OperationContract]
         string editPemesanan(string IDPemesanan, string NamaCustomer, string No_telpon);
         [OperationContract]
@@ -22,7 +28,10 @@ namespace ServiceReservasi
         List<CekLokasi> ReviewLokasi();
         [OperationContract]
         List<DetailLokasi> DetailLokasi();
+        [OperationContract]
+        List<Pemesanan> Pemesanan();
     }
+
     [DataContract]
     public class CekLokasi
     {
@@ -55,10 +64,33 @@ namespace ServiceReservasi
         [DataMember]
         public string NamaCustomer { get; set; }
         [DataMember]
-        public string NoTelpon { get; set; }
+        public string NoTelepon { get; set; }
         [DataMember]
         public int JumlahPemesanan { get; set; }
         [DataMember]
         public string Lokasi { get; set; }
     }
+
+    [DataContract]
+    public class CompositeType
+    {
+        bool boolValue = true;
+        string stringValue = "Hello ";
+
+        [DataMember]
+        public bool BoolValue
+        {
+            get { return boolValue; }
+            set { boolValue = value; }
+        }
+
+        [DataMember]
+        public string StringValue
+        {
+            get { return stringValue; }
+            set { stringValue = value; }
+        }
+    }
+
+
 }
